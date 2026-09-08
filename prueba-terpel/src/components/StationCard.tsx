@@ -8,8 +8,9 @@ type Props = {
 
 function StationCard({ station }: Props) {
     const queryClient = useQueryClient();
-    const buttonText = station.isActive ? 'Desactivar' : 'Activar';
-    const statusLabel = station.isActive ? 'Activado' : 'Desactivado';
+    const isPublished = station.status === 'published';
+    const buttonText = isPublished ? 'Desactivar' : 'Activar';
+    const statusLabel = isPublished ? 'Activado' : 'Desactivado';
 
     const toggleActiveStations = () => {
         toggleStationInCache(queryClient, station.stationId);
@@ -20,7 +21,7 @@ function StationCard({ station }: Props) {
             <div className="flex items-start gap-4">
                 <div
                     className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-xl ${
-                        station.isActive ? 'bg-emerald-500/15' : 'bg-slate-800 grayscale'
+                        isPublished ? 'bg-emerald-500/15' : 'bg-slate-800 grayscale'
                     }`}
                 >
                     <span aria-hidden="true">⛽</span>
@@ -31,7 +32,7 @@ function StationCard({ station }: Props) {
                         <span className="font-semibold text-white">{station.name}</span>
                         <span
                             className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${
-                                station.isActive
+                                isPublished
                                     ? 'bg-emerald-500/15 text-emerald-400'
                                     : 'bg-rose-500/15 text-rose-400'
                             }`}
@@ -59,7 +60,7 @@ function StationCard({ station }: Props) {
             <button
                 onClick={toggleActiveStations}
                 className={`shrink-0 rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
-                    station.isActive
+                    isPublished
                         ? 'bg-rose-500/15 text-rose-400 hover:bg-rose-500/25'
                         : 'bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/25'
                 }`}

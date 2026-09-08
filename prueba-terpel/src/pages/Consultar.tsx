@@ -22,7 +22,12 @@ function Consultar() {
           serviceIdsForStation.includes(service.serviceId)
         );
 
-        return { ...station, services: servicesForStation, isActive: true };
+        return {
+          ...station,
+          services: servicesForStation,
+          status: 'published' as const,
+          updatedAt: new Date().toISOString(),
+        };
       });
     },
     staleTime: Infinity,
@@ -41,7 +46,7 @@ function Consultar() {
           <StationCard key={station.stationId} station={station} />
         ))}
       </div>
-    </div>
+      </div>
   )
 }
 

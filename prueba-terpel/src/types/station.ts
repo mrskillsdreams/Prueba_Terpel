@@ -18,10 +18,13 @@ export interface StationService {
   serviceId: string
 }
 
+export type StationStatus = 'draft' | 'published'
+
 export interface StationWithServices {
   id: number
-  isActive: boolean
   name: string
   stationId: string
+  status: StationStatus
+  updatedAt: string
   services: Service[]
 }

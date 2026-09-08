@@ -1,13 +1,17 @@
 import { QueryClient } from '@tanstack/react-query';
+import type { StationWithServices } from '../types/station';
 
-// Recibe el queryClient y el ID de la estación a modificar
 export const toggleStationInCache = (queryClient: QueryClient, stationId: string) => {
-    queryClient.setQueryData(['stations'], (oldStations: any[] | undefined) => {
+    queryClient.setQueryData<StationWithServices[]>(['stations'], (oldStations) => {
         if (!oldStations) return [];
-        
+
         return oldStations.map(oldStation =>
-            oldStation.stationId === stationId 
-                ? { ...oldStation, isActive: !oldStation.isActive } 
+            oldStation.stationId === stationId
+                ? {
+                    ...oldStation,
+                    status: oldStation.status === 'published' ? 'draft' : 'published',
+                    updatedAt: new Date().toISOString(),
+                }
                 : oldStation
         );
     });
