@@ -24,8 +24,6 @@ function UseEffectDepsBugFix() {
     fetchContent(stationId, controller.signal)
       .then(result => setContent(result))
       .catch(error => {
-        // Un abort es esperado (pasó de estación antes de que respondiera); cualquier
-        // otro error sí merece registrarse.
         if (error.name !== 'AbortError') console.error(error)
       })
 
