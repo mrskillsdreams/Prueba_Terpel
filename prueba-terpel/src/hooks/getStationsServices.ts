@@ -1,5 +1,5 @@
 import type { Service, Station, StationService } from '../types/station'
-import { rel_stations_services, services, stations } from '../services/stationsServices'
+import { rel_stations_services, services, stations } from '../services/getStationsServices'
 
 export function fetchStations(): Promise<Station[]> {
   return Promise.resolve(stations)
