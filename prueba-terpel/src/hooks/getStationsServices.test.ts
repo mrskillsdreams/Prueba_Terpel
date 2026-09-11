@@ -1,5 +1,5 @@
 // Mock de la capa de datos (services/): así el test no depende de las estaciones reales.
-jest.mock('../services/stationsServices', () => ({
+jest.mock('../services/getStationsServices', () => ({
   stations: [{ id: 1, name: 'Estación Mock', stationId: '999' }],
   services: [{ id: 1, serviceId: 's1', serviceName: 'Baño', icon: '<svg></svg>' }],
   rel_stations_services: [{ id: 1, stationId: '999', serviceId: 's1' }],
